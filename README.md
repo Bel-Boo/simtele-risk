@@ -3,7 +3,9 @@
 Aplicación web (Streamlit) con 4 casos de estudio inspirados en un sistema de transporte por cable.
 **Uso estrictamente educativo: datos sintéticos, sin conexión con equipos reales.**
 
-**Integrantes:** Estrugo Perez Valeria Isabel - Tarqui Humerez Mayra Belen · **Mención:** Ingenieria de Sistemas · **App:** https://simtele-risk-5tdbgj4tpeqqohwoyk7yod.streamlit.app/
+**Integrantes:** Estrugo Perez Valeria Isabel · Tarqui Humerez Mayra Belen
+**Mención:** Ingenieria de Sistemas
+**App:** https://simtele-risk-5tdbgj4tpeqqohwoyk7yod.streamlit.app/
 
 ## Estado (Semana 1)
 | Módulo | Estado |
