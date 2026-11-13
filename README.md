@@ -3,7 +3,7 @@
 Aplicación web (Streamlit) con 4 casos de estudio inspirados en un sistema de transporte por cable.
 **Uso estrictamente educativo: datos sintéticos, sin conexión con equipos reales.**
 
-**Integrantes:** _(nombres)_ · **Mención:** _(mención)_ · **App:** _(enlace de Streamlit Cloud)_
+**Integrantes:** Estrugo Perez Valeria Isabel - Tarqui Humerez Mayra Belen · **Mención:** Ingenieria de Sistemas · **App:** https://simtele-risk-5tdbgj4tpeqqohwoyk7yod.streamlit.app/
 
 ## Estado (Semana 1)
 | Módulo | Estado |
@@ -37,19 +37,3 @@ streamlit run app.py
 ```
 Sin configurar nada, usa SQLite local (`data/simtele_local.db`). Pruebas: `python -m pytest -q`.
 
-## Base de datos en la nube (necesaria en Streamlit Community Cloud)
-Streamlit Cloud borra los archivos locales al reiniciar, por eso se usa PostgreSQL externo (Supabase o Neon).
-1. Crea un proyecto en Supabase o Neon.
-2. En su **SQL Editor** pega y ejecuta `db/schema_postgres.sql`.
-3. Copia `.streamlit/secrets.toml.example` → `.streamlit/secrets.toml` y llena tus datos (local), o pega el contenido en
-   **Streamlit Cloud → Settings → Secrets**.
-4. Reinicia la app. En la barra lateral debe decir `Base de datos: postgresql`.
-
-## Despliegue
-1. Sube el repo a GitHub (el `.gitignore` ya excluye los secretos).
-2. https://share.streamlit.io → *Create app* → repo, rama `main`, archivo `app.py`.
-3. En *Advanced settings* → Secrets pega la configuración de la BD.
-
-## Prueba de persistencia (para la defensa)
-Deterioro → elegir escenario → Ejecutar → pestaña Interpretación → **Guardar** → reiniciar/actualizar la app →
-**Historial** → abrir la simulación → **Repetir el cálculo** → debe mostrar ✅ en todos los métodos.
