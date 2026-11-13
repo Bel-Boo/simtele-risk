@@ -38,7 +38,6 @@ def conclusion_numerica(out, tipo):
 
 
 def conclusion_problema(out, tipo, params, horizonte_dias=200.0):
-    """Borrador automático (con números reales de la ejecución) de la conclusión sobre el FENÓMENO."""
     d, res = out["diag"], out["res"]
     buenos = [r for r in res if r["convergio"]]
     malos = [r for r in res if r["tolerancia"] is not None and not r["convergio"]]
@@ -48,8 +47,7 @@ def conclusion_problema(out, tipo, params, horizonte_dias=200.0):
     fi = lambda m: f"{iters[m]} iteraciones" if iters[m] else "no convergió"
     n = d["n"]
     dias = rel(peor) * horizonte_dias
-    L = ["(BORRADOR AUTOMÁTICO: léanlo, entiéndanlo y reescríbanlo con sus palabras antes de guardarlo.)",
-         f"- Qué representa x: los {n} coeficientes de calibración del modelo hipotético de deterioro "
+    L = [f"- Qué representa x: los {n} coeficientes de calibración del modelo hipotético de deterioro "
          f"D(t) = D0 + αt + βt². x* es el valor 'verdadero' sintético y el error de x se propaga al tiempo "
          f"estimado t* en que se alcanzaría el umbral de inspección.",
          f"- Ejemplo ilustrativo (suponiendo t* ≈ {horizonte_dias:.0f} días): el peor error relativo entre los métodos "
