@@ -7,7 +7,7 @@ Aplicación web (Streamlit) con 4 casos de estudio inspirados en un sistema de t
 
 **Mención:** Ingenieria de Sistemas
 
-**App:** https://simtele-risk-5tdbgj4tpeqqohwoyk7yod.streamlit.app/
+**App:** https://simtele-risk-psiwmfc6lsrdcgh3fmr4j2.streamlit.app/
 
 ## Estado (Semana 1)
 | Módulo | Estado |
