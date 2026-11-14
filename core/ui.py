@@ -43,45 +43,38 @@ def pagina_pendiente(clave):
             st.markdown(f"**{tipo.replace('_', ' ')}** — {desc}")
 
 
-COLORES = {"detencion": "#ff4d4f", "deterioro": "#faad14", "oscilaciones": "#36cfc9", "sensores": "#4096ff"}
-_NAV = ["#f472b6", "#ff4d4f", "#faad14", "#36cfc9", "#4096ff", "#b37feb"]
+COLORES = {"detencion": "#e11d2e", "deterioro": "#f5f5f5", "oscilaciones": "#9ca3af", "sensores": "#7f1d1d"}
 
 
 def estilo():
-    """CSS global: barra lateral con degradado, enlaces de colores, tarjetas y botones."""
-    nav = "\n".join(
-        f'[data-testid="stSidebarNav"] li:nth-child({i}) a{{border-left-color:{c} !important;}}'
-        f'\n[data-testid="stSidebarNav"] li:nth-child({i}) a[aria-current="page"]'
-        f'{{background:linear-gradient(90deg,{c}55,{c}11) !important;}}'
-        for i, c in enumerate(_NAV, start=1))
-    st.markdown(f"""
+    """CSS global: paleta negro / blanco / gris / rojo."""
+    st.markdown("""
 <style>
-[data-testid="stSidebar"]{{background:linear-gradient(190deg,#0b1020 0%,#1b1446 55%,#3b1d6e 100%);
-  border-right:1px solid rgba(255,255,255,.08);}}
-[data-testid="stSidebarNav"] a{{border-radius:12px;margin:5px 0;padding:.6rem .85rem;
-  border-left:6px solid transparent;background:rgba(255,255,255,.05);transition:all .15s ease;}}
-[data-testid="stSidebarNav"] a:hover{{background:rgba(255,255,255,.14);transform:translateX(4px);}}
-[data-testid="stSidebarNav"] a[aria-current="page"]{{font-weight:700;box-shadow:0 0 14px rgba(255,255,255,.10);}}
-{nav}
-h1{{background:linear-gradient(90deg,#ff7eb3,#a78bfa,#38bdf8);-webkit-background-clip:text;
-  background-clip:text;-webkit-text-fill-color:transparent;font-weight:800 !important;}}
-[data-testid="stMetric"]{{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);
-  border-radius:14px;padding:12px 16px;}}
-[data-testid="stVerticalBlockBorderWrapper"]{{border-radius:16px;}}
-button[kind="primary"]{{background:linear-gradient(90deg,#ff4d6d,#8b5cf6);border:0;color:white;font-weight:700;}}
-button[kind="primary"]:hover{{filter:brightness(1.15);}}
-button[data-baseweb="tab"]{{font-weight:600;}}
-.marca{{padding:.9rem 1rem;border-radius:14px;margin-top:1rem;
-  background:linear-gradient(135deg,#ff4d6d33,#8b5cf633,#38bdf833);border:1px solid rgba(255,255,255,.15);}}
-.marca b{{font-size:1.15rem;}}
-.chip{{display:inline-block;padding:2px 10px;margin:2px 3px 2px 0;border-radius:999px;font-size:.75rem;
-  font-weight:600;color:#0b1020;}}
+[data-testid="stSidebar"]{background:linear-gradient(190deg,#000000 0%,#0f0f10 60%,#1c1c1e 100%);
+  border-right:1px solid rgba(255,255,255,.10);}
+[data-testid="stSidebarNav"] a{border-radius:10px;margin:5px 0;padding:.6rem .85rem;
+  border-left:6px solid #4b5563;background:rgba(255,255,255,.05);transition:all .15s ease;}
+[data-testid="stSidebarNav"] a:hover{background:rgba(255,255,255,.14);border-left-color:#f5f5f5;transform:translateX(4px);}
+[data-testid="stSidebarNav"] a[aria-current="page"]{font-weight:700;border-left-color:#e11d2e;
+  background:linear-gradient(90deg,rgba(225,29,46,.38),rgba(225,29,46,.06));}
+h1{background:linear-gradient(90deg,#ffffff,#d1d5db 55%,#ef4444);-webkit-background-clip:text;
+  background-clip:text;-webkit-text-fill-color:transparent;font-weight:800 !important;}
+[data-testid="stMetric"]{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.14);
+  border-left:4px solid #e11d2e;border-radius:10px;padding:12px 16px;}
+[data-testid="stVerticalBlockBorderWrapper"]{border-radius:14px;}
+button[kind="primary"]{background:linear-gradient(90deg,#e11d2e,#8f1220);border:0;color:#fff;font-weight:700;}
+button[kind="primary"]:hover{filter:brightness(1.2);}
+button[data-baseweb="tab"]{font-weight:600;}
+.marca{padding:.9rem 1rem;border-radius:12px;margin-top:1rem;
+  background:linear-gradient(135deg,rgba(225,29,46,.25),rgba(255,255,255,.05));border:1px solid rgba(255,255,255,.18);}
+.marca b{font-size:1.15rem;}
+.chip{display:inline-block;padding:2px 10px;margin:2px 3px 2px 0;border-radius:999px;font-size:.75rem;font-weight:700;}
 </style>""", unsafe_allow_html=True)
 
 
 def sidebar_marca():
-    chips = "".join(f'<span class="chip" style="background:{c}">{t}</span>' for t, c in
-                    [("NORMAL", "#4ade80"), ("ESTRÉS", "#facc15"), ("MAL COND.", "#f87171")])
+    chips = "".join(f'<span class="chip" style="background:{bg};color:{fg}">{t}</span>' for t, bg, fg in
+                    [("NORMAL", "#f5f5f5", "#0a0a0a"), ("ESTRÉS", "#9ca3af", "#0a0a0a"), ("MAL COND.", "#e11d2e", "#ffffff")])
     st.sidebar.markdown(
         f'<div class="marca"><b>🚡 SIMTELE-RISK</b><br><small>Métodos Numéricos · uso educativo</small>'
         f'<br><div style="margin-top:6px">{chips}</div></div>', unsafe_allow_html=True)
