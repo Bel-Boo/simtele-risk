@@ -2,7 +2,9 @@ import numpy as np
 import streamlit as st
 
 from core.casos import CASOS
-from core.escenarios import MATRICES, PARAMS_DEFECTO, TIPOS
+from core.escenarios import (EJEMPLO_MATRIZ, MATRICES, PARAMS_DEFECTO, TIPOS, parsear_matriz,
+                             parsear_vector, validar_matriz)
+from core.sistemas_lineales import diagnostico
 from core.graficos import fig_convergencia, fig_errores, fig_solucion, tabla_metodos
 from core.modulo2 import a_ejecuciones, conclusion_numerica, conclusion_problema, correr
 from core.ui import AVISO, banner_bd
@@ -31,7 +33,11 @@ with tab_modelo:
     c1, c2, c3 = st.columns(3)
     matriz = c1.selectbox("Matriz A", list(MATRICES), index=list(MATRICES).index(base["matriz"]),
                           format_func=lambda m: MATRICES[m], key=f"mat_{k}")
-    n = c2.number_input("Tamaño n (≥ 4)", 4, 200, base["n"], step=1, key=f"n_{k}")
+    n = base["n"]
+    if matriz == "personalizada":
+        c2.caption("n = tamaño de la matriz que pegues abajo")
+    else:
+        n = c2.number_input("Tamaño n (≥ 4)", 4, 200, base["n"], step=1, key=f"n_{k}")
     tol = c3.select_slider("Tolerancia (‖b−Ax‖/‖b‖)", [10.0 ** -e for e in range(2, 15)],
                            value=base["tol"], format_func=lambda v: f"{v:.0e}", key=f"tol_{k}")
     c4, c5 = st.columns(2)
@@ -42,7 +48,31 @@ with tab_modelo:
     equipo = st.text_input("Equipo / usuario (opcional)", key="equipo")
     params = {"matriz": matriz, "n": int(n), "tol": float(tol), "max_iter": int(max_iter),
               "eps_sens": float(eps_sens)}
-    if st.button("▶ Ejecutar los 5 métodos", type="primary"):
+    matriz_ok = True
+    if matriz == "personalizada":
+        st.markdown("##### Tu matriz A")
+        txt = st.text_area("Una fila por línea; separa con espacios, comas o `;` (también vale `[[1,2],[3,4]]` y fracciones como 1/3)",
+                           EJEMPLO_MATRIZ, height=170, key=f"A_{k}")
+        xtxt = st.text_input("x* conocido (opcional; vacío = 1, 2, …, n)", key=f"xs_{k}")
+        try:
+            Ac = parsear_matriz(txt)
+            xc = parsear_vector(xtxt) if xtxt.strip() else None
+            validar_matriz(Ac, xc)
+            params["A"], params["n"] = Ac.tolist(), int(Ac.shape[0])
+            if xc is not None:
+                params["x_star"] = xc.tolist()
+            dg = diagnostico(Ac)
+            st.success(f"Matriz {dg['n']}×{dg['n']} válida · κ(A) = {dg['kappa']:.3e} · "
+                       f"{'SPD' if dg['spd'] else 'NO SPD'} · "
+                       f"{'diagonalmente dominante' if dg['diag_dominante'] else 'no diagonalmente dominante'}")
+            if not dg["spd"]:
+                st.warning("A no es simétrica definida positiva: el Gradiente Conjugado estándar NO tiene convergencia "
+                           "garantizada (se ejecuta igual y se reportará lo que pase). Si Jacobi/Gauss-Seidel no cumplen "
+                           "sus condiciones (ρ < 1), también pueden fallar.")
+        except ValueError as e:
+            matriz_ok = False
+            st.error(str(e))
+    if st.button("▶ Ejecutar los 5 métodos", type="primary", disabled=not matriz_ok):
         try:
             with st.spinner("Calculando…"):
                 st.session_state["m2"] = {"tipo": tipo, "params": params, "out": correr(params),
