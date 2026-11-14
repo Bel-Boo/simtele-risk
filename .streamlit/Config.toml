@@ -1,10 +1,20 @@
-[theme]
-base = "dark"
-primaryColor = "#e11d2e"
+# Tema en escala de grises con modo claro y oscuro (sigue la preferencia del dispositivo).
+[theme.light]
+primaryColor = "#374151"
+backgroundColor = "#ffffff"
+secondaryBackgroundColor = "#f3f4f6"
+textColor = "#111827"
+
+[theme.light.sidebar]
+backgroundColor = "#f3f4f6"
+secondaryBackgroundColor = "#e5e7eb"
+
+[theme.dark]
+primaryColor = "#6b7280"
 backgroundColor = "#0a0a0a"
 secondaryBackgroundColor = "#171717"
 textColor = "#f5f5f5"
 
-[theme.sidebar]
+[theme.dark.sidebar]
 backgroundColor = "#000000"
 secondaryBackgroundColor = "#141414"
