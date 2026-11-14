@@ -43,38 +43,38 @@ def pagina_pendiente(clave):
             st.markdown(f"**{tipo.replace('_', ' ')}** — {desc}")
 
 
-COLORES = {"detencion": "#e11d2e", "deterioro": "#f5f5f5", "oscilaciones": "#9ca3af", "sensores": "#7f1d1d"}
+COLORES = {"detencion": "#4b5563", "deterioro": "#6b7280", "oscilaciones": "#9ca3af", "sensores": "#78716c"}
 
 
 def estilo():
-    """CSS global: paleta negro / blanco / gris / rojo."""
+    """CSS neutro (grises translúcidos): se ve bien en modo claro Y oscuro."""
     st.markdown("""
 <style>
-[data-testid="stSidebar"]{background:linear-gradient(190deg,#000000 0%,#0f0f10 60%,#1c1c1e 100%);
-  border-right:1px solid rgba(255,255,255,.10);}
 [data-testid="stSidebarNav"] a{border-radius:10px;margin:5px 0;padding:.6rem .85rem;
-  border-left:6px solid #4b5563;background:rgba(255,255,255,.05);transition:all .15s ease;}
-[data-testid="stSidebarNav"] a:hover{background:rgba(255,255,255,.14);border-left-color:#f5f5f5;transform:translateX(4px);}
-[data-testid="stSidebarNav"] a[aria-current="page"]{font-weight:700;border-left-color:#e11d2e;
-  background:linear-gradient(90deg,rgba(225,29,46,.38),rgba(225,29,46,.06));}
-h1{background:linear-gradient(90deg,#ffffff,#d1d5db 55%,#ef4444);-webkit-background-clip:text;
-  background-clip:text;-webkit-text-fill-color:transparent;font-weight:800 !important;}
-[data-testid="stMetric"]{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.14);
-  border-left:4px solid #e11d2e;border-radius:10px;padding:12px 16px;}
+  border-left:6px solid rgba(128,128,128,.55);background:rgba(128,128,128,.10);transition:all .15s ease;}
+[data-testid="stSidebarNav"] a:hover{background:rgba(128,128,128,.24);border-left-color:currentColor;transform:translateX(4px);}
+[data-testid="stSidebarNav"] a[aria-current="page"]{font-weight:800;border-left-color:currentColor;
+  background:rgba(128,128,128,.30);}
+h1{font-weight:800 !important;letter-spacing:-.5px;}
+[data-testid="stMetric"]{background:rgba(128,128,128,.08);border:1px solid rgba(128,128,128,.35);
+  border-left:5px solid rgba(128,128,128,.9);border-radius:10px;padding:12px 16px;}
 [data-testid="stVerticalBlockBorderWrapper"]{border-radius:14px;}
-button[kind="primary"]{background:linear-gradient(90deg,#e11d2e,#8f1220);border:0;color:#fff;font-weight:700;}
-button[kind="primary"]:hover{filter:brightness(1.2);}
+button[kind="primary"]{font-weight:700;border-radius:10px;}
 button[data-baseweb="tab"]{font-weight:600;}
 .marca{padding:.9rem 1rem;border-radius:12px;margin-top:1rem;
-  background:linear-gradient(135deg,rgba(225,29,46,.25),rgba(255,255,255,.05));border:1px solid rgba(255,255,255,.18);}
+  background:rgba(128,128,128,.14);border:1px solid rgba(128,128,128,.40);}
 .marca b{font-size:1.15rem;}
-.chip{display:inline-block;padding:2px 10px;margin:2px 3px 2px 0;border-radius:999px;font-size:.75rem;font-weight:700;}
+.chip{display:inline-block;padding:2px 10px;margin:2px 3px 2px 0;border-radius:999px;font-size:.75rem;
+  font-weight:700;border:1px solid rgba(128,128,128,.7);}
+.chip-n{background:#f5f5f5;color:#111;}
+.chip-e{background:#9ca3af;color:#111;}
+.chip-m{background:#111;color:#f5f5f5;}
 </style>""", unsafe_allow_html=True)
 
 
 def sidebar_marca():
-    chips = "".join(f'<span class="chip" style="background:{bg};color:{fg}">{t}</span>' for t, bg, fg in
-                    [("NORMAL", "#f5f5f5", "#0a0a0a"), ("ESTRÉS", "#9ca3af", "#0a0a0a"), ("MAL COND.", "#e11d2e", "#ffffff")])
     st.sidebar.markdown(
-        f'<div class="marca"><b>🚡 SIMTELE-RISK</b><br><small>Métodos Numéricos · uso educativo</small>'
-        f'<br><div style="margin-top:6px">{chips}</div></div>', unsafe_allow_html=True)
+        '<div class="marca"><b>🚡 SIMTELE-RISK</b><br><small>Métodos Numéricos · uso educativo</small>'
+        '<br><div style="margin-top:6px"><span class="chip chip-n">NORMAL</span>'
+        '<span class="chip chip-e">ESTRÉS</span><span class="chip chip-m">MAL COND.</span></div></div>',
+        unsafe_allow_html=True)
