@@ -39,6 +39,13 @@ def radio_espectral_gs(A):
     return float(max(abs(np.linalg.eigvals(T))))
 
 
+def _seguro_rho(f, A):
+    try:
+        return f(A)
+    except (np.linalg.LinAlgError, ValueError):
+        return float("nan")
+
+
 def diagnostico(A):
     return {
         "n": int(A.shape[0]),
@@ -46,8 +53,8 @@ def diagnostico(A):
         "simetrica": es_simetrica(A),
         "spd": es_spd(A),
         "diag_dominante": es_diag_dominante(A),
-        "rho_jacobi": radio_espectral_jacobi(A),
-        "rho_gauss_seidel": radio_espectral_gs(A),
+        "rho_jacobi": _seguro_rho(radio_espectral_jacobi, A),
+        "rho_gauss_seidel": _seguro_rho(radio_espectral_gs, A),
     }
 
 
@@ -201,12 +208,23 @@ def gradiente_conjugado(A, b, x_ref, tol=1e-8, max_iter=1000):
                       extra={"A_es_SPD": spd})
 
 
+def _seguro(nombre, fn, A, b, x_ref, *args):
+    """Si un método no se puede ejecutar (p. ej. diagonal con ceros) devuelve un resultado 'no convergió'."""
+    try:
+        return fn(A, b, x_ref, *args)
+    except (ValueError, np.linalg.LinAlgError, ZeroDivisionError) as e:
+        x = np.zeros(len(b))
+        tol = args[0] if args else None
+        mx = args[1] if args else None
+        return _resultado(nombre, x, [_reg(0, x, A, b, x_ref)], False, f"No ejecutable: {e}", perf_counter(), tol, mx)
+
+
 def resolver_todos(A, b, x_star, tol=1e-8, max_iter=1000):
     """Ejecuta los cinco métodos y devuelve la lista de resultados."""
     return [
-        referencia_directa(A, b, x_star),
-        lu_resolver(A, b, x_star),
-        jacobi(A, b, x_star, tol, max_iter),
-        gauss_seidel(A, b, x_star, tol, max_iter),
-        gradiente_conjugado(A, b, x_star, tol, max_iter),
+        _seguro("Directa (numpy.linalg.solve)", referencia_directa, A, b, x_star),
+        _seguro("LU (pivoteo parcial)", lu_resolver, A, b, x_star),
+        _seguro("Jacobi", jacobi, A, b, x_star, tol, max_iter),
+        _seguro("Gauss-Seidel", gauss_seidel, A, b, x_star, tol, max_iter),
+        _seguro("Gradiente Conjugado", gradiente_conjugado, A, b, x_star, tol, max_iter),
     ]
