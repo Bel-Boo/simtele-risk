@@ -13,7 +13,7 @@ CASOS = {
             "ESTRÉS": "v0 = 7 m/s, a = 0.5 m/s², tiempo de reacción 2 s y pasos h grandes (0.5 s) y pequeños (0.001 s).",
             "MAL_CONDICIONADO": "v(t)=v0(1−t/T)² tiene raíz doble en T: v'(T)=0, Newton pierde convergencia cuadrática.",
         },
-        "estado": "Semana 2",
+        "estado": "Activo",
     },
     "deterioro": {
         "nombre": "Deterioro y mantenimiento", "icono": "🔧", "pagina": "pages/2_Deterioro.py",
@@ -27,7 +27,7 @@ CASOS = {
             "ESTRÉS": "Sistema grande (n=40) y tolerancia 1e-12; mantenimiento retrasado (β mayor).",
             "MAL_CONDICIONADO": "Matriz de Hilbert (κ≈1e7): residuo pequeño pero error grande; umbral casi tangente (raíz casi doble).",
         },
-        "estado": "Semana 1: sistemas lineales (activo)",
+        "estado": "Activo: raíces + sistemas lineales",
     },
     "oscilaciones": {
         "nombre": "Oscilaciones por viento", "icono": "🌬️", "pagina": "pages/3_Oscilaciones.py",
@@ -41,7 +41,7 @@ CASOS = {
             "ESTRÉS": "F(t)=F0·sen(Ωt) cerca de la resonancia, tiempo largo y paso grande (RK2 pierde estabilidad).",
             "MAL_CONDICIONADO": "ζ cercano a 1 (ω_d→0): la frecuencia amortiguada es muy sensible a pequeños cambios de c, k y m.",
         },
-        "estado": "Semana 2",
+        "estado": "Activo",
     },
     "sensores": {
         "nombre": "Reconstrucción de sensores", "icono": "📡", "pagina": "pages/4_Sensores.py",
@@ -55,6 +55,6 @@ CASOS = {
             "ESTRÉS": "Ruido gaussiano σ=0.05, más nodos (20) y huecos más grandes.",
             "MAL_CONDICIONADO": "Nodos equiespaciados de alto grado en intervalo largo (fenómeno de Runge); matriz de Vandermonde con κ enorme.",
         },
-        "estado": "Semana 2",
+        "estado": "Activo",
     },
 }
