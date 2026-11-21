@@ -15,6 +15,12 @@ st.title(f"{C['icono']} {C['nombre']}")
 st.caption(AVISO)
 engine = banner_bd()
 
+sub = st.radio("Subexperimento", ["Raíces: tiempo hasta el umbral", "Sistemas lineales: calibración"], horizontal=True)
+if sub.startswith("Raíces"):
+    from core.ui_deterioro import render_raices
+    render_raices(engine)
+    st.stop()
+
 tab_modelo, tab_res, tab_interp = st.tabs(["1 · Modelo y parámetros", "2 · Resultados", "3 · Interpretación"])
 
 # ------------------------------------------------------------------ MODELO
