@@ -42,7 +42,7 @@ def render_raices(engine):
         c = st.columns(2)
         with c[0]: P["t_mant"] = E.f("Día de mantenimiento programado (0 = ninguno)", "t_mant")
         with c[1]: P["retraso"] = E.f("Retraso hipotético del mantenimiento (días)", "retraso", help="¿Y si el mantenimiento se atrasa?")
-        with st.expander("⚙️ Opciones avanzadas (puedes dejarlas como están)"):
+        with st.expander("⚙️ Opciones avanzadas"):
             auto = False
             if P["modelo"] == "cuadratico":
                 auto = st.checkbox("Calcular solo el intervalo de búsqueda y los puntos de partida (recomendado)", value=(tipo != "MAL_CONDICIONADO"), key=f"m2r_auto_{tipo}")

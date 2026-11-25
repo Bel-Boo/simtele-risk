@@ -9,12 +9,12 @@ ESC_EXPLICA = ("**NORMAL**: valores típicos, todo debería salir bien. · **EST
 QUE_HACE = {
     "detencion": ("Simula el frenado de emergencia de una cabina y responde: **¿cuánto tarda en detenerse y cuántos metros recorre?** "
                   "¿Alcanza a parar antes de un obstáculo?",
-                  "Solo necesitas la velocidad, el tiempo de reacción y la fuerza de frenado. Lo demás ya viene resuelto en «Opciones avanzadas»."),
+                  "Datos básicos: velocidad, tiempo de reacción y fuerza de frenado. El resto de parámetros está en «Opciones avanzadas»."),
     "deterioro": ("Estima **en qué día un indicador de desgaste (inventado) llegaría al límite de inspección** y qué pasa si el mantenimiento se retrasa. "
                   "Tiene dos partes: *Raíces* (¿cuándo?) y *Sistemas lineales* (cálculo de calibración).",
                   "En *Raíces* escribes cómo crece el desgaste y el límite. En *Sistemas lineales* puedes usar una matriz de ejemplo o pegar la tuya."),
     "oscilaciones": ("Simula **cómo se balancea una cabina empujada por el viento**: cuánto se mueve, qué tan rápido oscila y cuánto tarda en calmarse.",
-                     "Escribes masa, rigidez, amortiguamiento y la fuerza del viento (0 = sin viento). Lo demás ya viene resuelto."),
+                     "Datos básicos: masa, rigidez, amortiguamiento y fuerza del viento (0 = sin viento). El resto de parámetros está en «Opciones avanzadas»."),
     "sensores": ("Un sensor dejó de registrar algunos datos. Este módulo **rellena los datos que faltan** dibujando una curva que pasa por los datos "
                  "conocidos, y mide cuánto se equivoca.",
                  "Puedes dejar que la app genere los datos o pegar los tuyos. Tú eliges qué puntos «se pierden» para comprobar la reconstrucción."),

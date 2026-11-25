@@ -11,11 +11,11 @@ banner_bd()
 
 st.markdown("**¿Qué es esto?** Una herramienta para probar, con datos inventados, cómo se calculan cosas como *cuánto tarda en frenar una cabina*, "
             "*cuándo habría que inspeccionar un equipo*, *cuánto se balancea con el viento* o *cómo rellenar datos perdidos de un sensor*. "
-            "No necesitas saber matemáticas avanzadas: cada módulo te explica qué escribir y qué significa el resultado.")
+            "Cada módulo indica qué datos ingresar y cómo interpretar el resultado.")
 with st.container(border=True):
     st.markdown("##### Cómo empezar (3 pasos)")
     st.markdown("1️⃣ Elige uno de los **4 módulos** de abajo (o del menú de la izquierda).  \n"
-                "2️⃣ Escoge un escenario y pulsa **▶ Ejecutar**: ya vienen con valores de ejemplo, no necesitas escribir nada para ver cómo funciona.  \n"
+                "2️⃣ Escoge un escenario y pulsa **▶ Ejecutar**: ya traen valores de ejemplo que se pueden ejecutar de inmediato.  \n"
                 "3️⃣ Lee el **resumen** en palabras simples, y si quieres, cambia los números, guarda el experimento y recupéralo en **Historial**.")
 
 cols = st.columns(2)

@@ -22,7 +22,7 @@ if sub.startswith("Raíces"):
     render_raices(engine)
     st.stop()
 
-MATRICES_TXT = {"tridiagonal_dd": "Sencilla y estable (ejemplo que se resuelve fácil)", "poisson1d": "Grande y lenta de resolver (ejemplo exigente)",
+MATRICES_TXT = {"tridiagonal_dd": "Sencilla y estable (ejemplo bien condicionado)", "poisson1d": "Grande y lenta de resolver (ejemplo exigente)",
                 "hilbert": "Matriz de Hilbert (muy sensible; ejemplo delicado)", "personalizada": "La escribo yo"}
 
 
@@ -59,7 +59,7 @@ with tab_modelo:
         c2.caption("El tamaño será el de la matriz que escribas abajo.")
     else:
         n = c2.number_input("Cantidad de ecuaciones n (mínimo 4)", 4, 200, base["n"], step=1, key=f"n_{k}")
-    with st.expander("⚙️ Opciones avanzadas (puedes dejarlas como están)"):
+    with st.expander("⚙️ Opciones avanzadas"):
         c3, c4, c5 = st.columns(3)
         tol = c3.select_slider("Precisión exigida", [10.0 ** -e for e in range(2, 15)], value=base["tol"], format_func=lambda v: f"{v:.0e}", key=f"tol_{k}")
         max_iter = c4.number_input("Máximo de iteraciones (intentos)", 10, 100000, base["max_iter"], step=100, key=f"mi_{k}")

@@ -44,7 +44,7 @@ with tab_m:
             P["x_exacta"] = E.t("x(t) exacta", "x_exacta")
             P["dv_exacta"] = E.t("Derivada v'(t) exacta (opcional)", "dv_exacta")
             P["t_det_ref"] = E.f("Instante de detención conocido (0 = que la app lo calcule)", "t_det_ref")
-    with st.expander("⚙️ Opciones avanzadas (puedes dejarlas como están)"):
+    with st.expander("⚙️ Opciones avanzadas"):
         P["x0"] = E.f("Posición inicial x0 (m)", "x0")
         auto = False
         if P["modelo"] == "constante":

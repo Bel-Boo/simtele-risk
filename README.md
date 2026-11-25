@@ -7,12 +7,12 @@ Aplicación web (Streamlit) con **4 casos de estudio** inspirados en un sistema 
 - **Mención:** Ingeniería de Sistemas
 - **App desplegada:** https://simtele-risk-psiwmfc6lsrdcgh3fmr4j2.streamlit.app/
 
-## Guía rápida para usar la app (no hace falta saber de métodos numéricos)
+## Guía de uso
 
 1. **Inicio:** elige uno de los 4 módulos (Detención, Deterioro, Oscilaciones, Sensores).
-2. **Pestaña «1 · Datos de entrada»:** elige un escenario y pulsa **▶ Ejecutar**. Ya trae valores de ejemplo: no hay que escribir nada para ver cómo funciona.
+2. **Pestaña «1 · Datos de entrada»:** elige un escenario y pulsa **▶ Ejecutar**. Cada escenario trae valores de ejemplo que se pueden ejecutar de inmediato.
    - **NORMAL** = caso típico · **ESTRÉS** = caso exigente · **MAL CONDICIONADO** = caso matemáticamente delicado (no significa peligroso).
-   - Los *datos básicos* están a la vista, con su unidad y una ayuda al pasar el mouse por el signo «?». Lo técnico está en **⚙️ Opciones avanzadas** y puede dejarse como está.
+   - Los *datos básicos* están a la vista, con su unidad y una ayuda al pasar el mouse por el signo «?». Los parámetros técnicos están en **⚙️ Opciones avanzadas**.
    - Si algo se desordena, el botón **↺ Restablecer** devuelve el escenario a sus valores originales.
 3. **Pestaña «2 · Resultados»:** arriba hay un **resumen en palabras simples** con semáforo (✅ bien · ⚠️ ojo · ❌ problema). Debajo están los detalles técnicos (tablas y gráficos) y un **glosario**.
 4. **Pestaña «3 · Interpretación y guardado»:** dos conclusiones editables (una sobre los métodos y otra sobre el problema) y el botón **💾 Guardar**.

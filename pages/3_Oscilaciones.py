@@ -41,7 +41,7 @@ with tab_m:
                                  help=AYUDA + " Escribe 0 si no hay viento. Ej.: 300*sin(2*t) = viento que empuja y suelta 2 veces cada 2π segundos.")
     with c[1]: P["x0"] = E.f("Posición inicial (m)", "x0", help="Cuánto está desplazada la cabina al empezar. 0 = en reposo en el centro.")
     with c[2]: P["tf"] = E.f("Tiempo a simular (s)", "tf", positivo=True)
-    with st.expander("⚙️ Opciones avanzadas (puedes dejarlas como están)"):
+    with st.expander("⚙️ Opciones avanzadas"):
         c = st.columns(4)
         with c[0]: P["v0"] = E.f("Velocidad inicial (m/s)", "v0")
         with c[1]: P["N"] = E.i("Número de pasos de la simulación", "N", 2, 2000, help="Más pasos = más preciso pero más lento.")

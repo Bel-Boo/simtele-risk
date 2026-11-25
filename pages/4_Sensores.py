@@ -63,7 +63,7 @@ with tab_m:
                                            "oculto": ["sí" if i in sel else "" for i in range(n_pts)]}), width="stretch", hide_index=True)
         except Exception as e:
             st.warning(f"Revisa los datos: {e}")
-    with st.expander("⚙️ Opciones avanzadas (puedes dejarlas como están)"):
+    with st.expander("⚙️ Opciones avanzadas"):
         c = st.columns(4)
         with c[0]: P["umbral"] = E.t("Valor límite para hallar cuándo se cruza (opcional)", "umbral", help="Ej.: 0.5 → ¿en qué instante la señal reconstruida llega a 0.5?")
         with c[1]: P["tol"] = E.f("Precisión de esa búsqueda", "tol", positivo=True)
