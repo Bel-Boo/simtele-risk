@@ -107,7 +107,7 @@ Streamlit Community Cloud borra los archivos locales al reiniciar, por eso se us
 2. https://share.streamlit.io → *Create app* → repo, rama `main`, archivo `app.py`.
 3. En *Advanced settings → Secrets* pega la configuración de la BD.
 
-## Prueba de persistencia (defensa)
+## Prueba de persistencia
 
 Cualquier módulo → elegir escenario → **Ejecutar** → pestaña *Interpretación* → **Guardar** → actualizar o reiniciar la app → **Historial** → abrir la simulación (parámetros, tablas y gráficos se recuperan de la BD) → **Repetir el cálculo** → ✅ en todos los métodos.
 
