@@ -9,13 +9,13 @@ from .funciones import ErrorExpresion, compilar, derivada_numerica
 
 BASE = dict(modelo="cuadratico", D0=10.0, alpha=0.05, beta=0.0002, D_umbral=40.0,
             expr_D="10+0.05*t+0.0002*t**2", expr_dD="", a=0.0, b=1000.0, x0_newton=100.0, x0_sec=50.0, x1_sec=150.0,
-            tol=1e-10, max_iter=100, t_mant=300.0, retraso=0.0, eps_sens=1e-3, integrar_tasa=True, kint=6)
+            tol=1e-10, max_iter=100, t_mant=240.0, retraso=0.0, eps_sens=1e-3, integrar_tasa=True, kint=6)
 PRESETS = {
     "NORMAL": dict(BASE),
     "ESTRÉS": dict(BASE, alpha=0.01, beta=0.0006, tol=1e-12, max_iter=200, x0_newton=50.0, x0_sec=20.0, x1_sec=80.0,
                    t_mant=200.0, retraso=60.0, eps_sens=1e-2, kint=8),
     "MAL_CONDICIONADO": dict(BASE, alpha=0.1, beta=-0.0005, D_umbral=14.999999, b=100.0, x0_newton=50.0,
-                             x0_sec=20.0, x1_sec=60.0, t_mant=120.0, eps_sens=1e-6),
+                             x0_sec=20.0, x1_sec=60.0, t_mant=90.0, eps_sens=1e-6),
 }
 DESCRIPCION = {
     "NORMAL": "D(t)=D0+αt+βt² con raíz simple bien separada: todos los métodos convergen con su orden teórico.",

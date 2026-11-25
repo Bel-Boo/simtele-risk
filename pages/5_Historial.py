@@ -10,6 +10,7 @@ from core.ui import AVISO, banner_bd
 
 st.title("🗂️ Historial de experimentos")
 st.caption(AVISO)
+st.info("Aquí están los experimentos que guardaste. Elige uno para ver sus datos, tablas y gráficos, o pulsa «Repetir el cálculo» al final para comprobar que vuelve a dar el mismo resultado.")
 engine = banner_bd()
 if engine is None:
     st.stop()
@@ -17,7 +18,7 @@ if engine is None:
 f1, f2, f3 = st.columns(3)
 caso = f1.selectbox("Caso", [""] + db.CASOS, format_func=lambda v: v or "Todos")
 tipo = f2.selectbox("Escenario", [""] + list(TIPOS), format_func=lambda v: (v or "Todos").replace("_", " "))
-texto = f3.text_input("Buscar por equipo/usuario")
+texto = f3.text_input("Buscar por tu nombre o equipo")
 df = db.listar_simulaciones(engine, caso or None, tipo or None, texto or None)
 st.dataframe(df, width="stretch", hide_index=True)
 if df.empty:

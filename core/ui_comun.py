@@ -14,6 +14,14 @@ class Entrada:
     def __init__(self, P, tipo, pref):
         self.P, self.tipo, self.pref, self.errores = P, tipo, pref, []
 
+    def restablecer(self):
+        """Botón que devuelve TODOS los campos de este escenario a sus valores iniciales."""
+        if st.button("↺ Restablecer los valores de este escenario", key=f"rst_{self.pref}_{self.tipo}",
+                     help="Borra tus cambios y vuelve a los números originales del escenario."):
+            for k in [k for k in st.session_state if str(k).startswith(f"{self.pref}_") and str(k).endswith(f"_{self.tipo}")]:
+                del st.session_state[k]
+            st.rerun()
+
     def _k(self, campo):
         return f"{self.pref}_{campo}_{self.tipo}"
 
@@ -104,17 +112,19 @@ def mostrar_refinamiento(tabla, R=None):
 def interpretacion_y_guardado(engine, caso, S, mod, fuente):
     """Pestaña de interpretación: dos conclusiones separadas (editables) + guardado en la base de datos."""
     rid = S["id"]
-    st.markdown("### Conclusión NUMÉRICA (sobre los métodos)")
+    st.info("Aquí se explican los resultados. Los textos son **borradores automáticos**: léelos, corrígelos con tus palabras y luego guarda. "
+            "Son dos conclusiones distintas: una sobre **los métodos de cálculo** y otra sobre **el problema que se simula**.")
+    st.markdown("### 1) Conclusión de los MÉTODOS (¿qué método funcionó mejor y por qué?)")
     c_num = st.text_area("Editable", mod.conclusion_numerica(S["out"]), height=260, key=f"cn_{caso}_{rid}")
-    st.markdown("### Conclusión del PROBLEMA (sobre el fenómeno simulado)")
+    st.markdown("### 2) Conclusión del PROBLEMA (¿qué significa el resultado en la vida real y qué no se puede asegurar?)")
     c_pro = st.text_area("Editable", mod.conclusion_problema(S["out"]), height=260, key=f"cp_{caso}_{rid}")
     st.divider()
-    st.text_input("Equipo / usuario (opcional)", key="equipo")
+    st.text_input("Tu nombre o equipo (opcional, ayuda a encontrar el experimento en el Historial)", key="equipo")
     if engine is None:
         st.warning("Sin base de datos: no se puede guardar.")
     elif S.get("guardada"):
         st.success(f"Guardada como simulación #{S['guardada']}. Ábrela en **Historial**.")
-    elif st.button("💾 Guardar experimento en la base de datos", key=f"save_{caso}_{rid}"):
+    elif st.button("💾 Guardar este experimento", key=f"save_{caso}_{rid}"):
         texto = f"## CONCLUSIÓN NUMÉRICA\n{c_num}\n\n## CONCLUSIÓN DEL PROBLEMA\n{c_pro}"
         S["guardada"] = db.guardar_simulacion(engine, caso, S["tipo"], S["params"], fuente,
                                               mod.ejecuciones(S["params"], texto, out=S["out"]),
@@ -132,6 +142,6 @@ def ejecutar(clave, tipo, params, mod):
             with st.spinner("Calculando…"):
                 st.session_state[clave] = {"tipo": tipo, "params": params, "out": mod.correr(params),
                                            "id": st.session_state.get(clave, {}).get("id", 0) + 1, "guardada": None}
-            st.success("Listo. Revisa las pestañas Resultados e Interpretación.")
+            st.success("✅ Listo. Ahora abre la pestaña «2 · Resultados».")
         except Exception as e:  # mensaje claro al usuario, sin tumbar la app
             st.error(f"No se pudo calcular: {e}")
